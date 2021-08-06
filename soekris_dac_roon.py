@@ -150,7 +150,9 @@ discover.stop()
 for api in apis:
     api.stop()
 
-roon = RoonApi(appinfo, token, None, None, True, core_id)
-
-plugin = dam1021roon('/dev/ttyUSB0', roon, ctrl_id, "dam1021")
-plugin.run_loop()
+try:
+    roon = RoonApi(appinfo, token, None, None, True, core_id)
+    plugin = dam1021roon('/dev/ttyUSB0', roon, ctrl_id, "dam1021")
+    plugin.run_loop()
+except Exception:
+    print("Plugin crashed, relaunching...")
